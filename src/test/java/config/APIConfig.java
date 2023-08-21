@@ -11,7 +11,7 @@ public class APIConfig {
     private static  HttpProtocolBuilder httpProtocol = http
             .baseUrl(baseURL)
             .acceptHeader("application/json")
-            .header("Authorization", "Bearer 3c6b44b936f187c81050188a573861d2bdd75bec")
+            .header("Authorization", "Bearer ")
             .acceptEncodingHeader("gzip, deflate")
             .acceptLanguageHeader("en-US,en;q=0.8,de-DE,de;q=0.5");
 
