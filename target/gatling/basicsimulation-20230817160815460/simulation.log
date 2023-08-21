@@ -1,4 +1,0 @@
-RUN	simulations.BasicSimulation	basicsimulation	1692288495460	 	3.9.5
-USER	BasicSimulation2	START	1692288496062
-REQUEST		request_2	1692288496009	1692288496088	KO	j.l.IllegalArgumentException: Protocol TLSv1.3 is not supported.
-USER	BasicSimulation2	END	1692288501108
