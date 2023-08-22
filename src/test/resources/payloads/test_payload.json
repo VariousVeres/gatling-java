@@ -1,0 +1,52 @@
+{
+  "external_customer_id": null,
+  "payment": {
+    "path_keys": null,
+    "type": "bank_transfer"
+  },
+  "buyer_answers": {
+    "advanced": {
+      "opt_out": false,
+      "double_opt_in": false
+    },
+    "additional": [],
+    "default": {
+      "email": "nacinemar@mailinator.com",
+      "city": "Odit dolore dolores ",
+      "zip": "98217",
+      "street_number": "126",
+      "street_name": "Melissa Kirkland",
+      "country": "AL",
+      "company_name": "Michael and Nguyen Associates",
+      "last_name": "Little",
+      "first_name": "Jasper"
+    }
+  },
+  "tickets": [
+    {
+      "attendee_answers": [
+        {
+          "ticket": {
+            "external_ticket_id": null,
+            "id": null
+          },
+          "external_customer_id": null,
+          "advanced": {
+            "opt_out": false,
+            "double_opt_in": false
+          },
+          "additional": [],
+          "default": {}
+        }
+      ],
+      "amount": 1,
+      "price": 12300,
+      "category_id": 591434
+    }
+  ],
+  "locale": "en-us",
+  "is_terms_accepted": true,
+  "contact_center": false,
+  "is_manual": false,
+  "event_id": 266888
+}
