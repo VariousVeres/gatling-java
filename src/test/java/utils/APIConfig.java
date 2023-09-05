@@ -24,5 +24,9 @@ public class APIConfig {
         return BASE_URL;
     }
 
+    public static String getEnv()  {
+        return ENV;
+    }
+
 
 }
