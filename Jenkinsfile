@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'selenium_node'
+        label 'docker'
       }
     parameters {
         string(
