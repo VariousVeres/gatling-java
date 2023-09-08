@@ -30,11 +30,12 @@ pipeline {
             --entrypoint=''
             """){
                     sh '''
-  mvn -f /opt/jenkins/workspace/AcceptanceTests/Load-testing/pom.xml clean gatling:test -Dmp=master -Denvironment=staging1 -Dmultiplier=1;
+  mvn -f /opt/jenkins/workspace/AcceptanceTests/Load-testing/pom.xml clean gatling:test -Dgatling.simulationClass=simulations.BasicManagerSimulation;
                     '''
                 }
             }
           }
+          gatlingArchive()
         }
     }
 }
