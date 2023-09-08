@@ -23,18 +23,18 @@ pipeline {
     stages {
       stage('Build') {
         steps {
-        script {
-          docker.image('maven:3.8.6-openjdk-11').inside(
-            """
-            --entrypoint=''
-            """){
-                    sh '''
+          script {
+            docker.image('maven:3.8.6-openjdk-11').inside(
+              """
+              --entrypoint=''
+              """){
+                sh '''
   mvn -f /opt/jenkins/workspace/AcceptanceTests/Load-testing/pom.xml clean gatling:test -Dgatling.simulationClass=simulations.BasicManagerSimulation;
-                    '''
-                }
+                '''
             }
           }
         }
         gatlingArchive()
+      }
     }
 }
