@@ -24,7 +24,6 @@ pipeline {
       stage('Build') {
         steps {
         script {
-          sh "ls -la"
           docker.image('maven:3.8.6-openjdk-11').inside(
             """
             --entrypoint=''
@@ -35,7 +34,7 @@ pipeline {
                 }
             }
           }
-
         }
+        gatlingArchive()
     }
 }
