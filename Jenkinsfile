@@ -24,11 +24,12 @@ pipeline {
       stage('Build') {
         steps {
         script {
+          sh "ls -la"
           docker.image('maven:3.8.6-openjdk-11').inside(
-            '''
+            """
             --entrypoint=''
             -v ${PWD}:/var/project
-            '''){
+            """){
                     sh '''
   mvn -f /var/project/pom.xml clean gatling:test -Dmp=master -Denvironment=staging1 -Dmultiplier=1
                     '''
