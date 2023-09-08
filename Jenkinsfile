@@ -29,12 +29,13 @@ pipeline {
               --entrypoint=''
               """){
                 sh '''
+  pwd;
   mvn -f /opt/jenkins/workspace/AcceptanceTests/Load-testing/pom.xml clean gatling:test -Dgatling.simulationClass=simulations.BasicManagerSimulation;
                 '''
             }
           }
-          gatlingArchive()
-        }
+
+       }
       }
     }
 }
