@@ -1,10 +1,7 @@
 pipeline {
     agent {
-            docker {
-                image 'maven:3.9.4-eclipse-temurin-11-alpine'
-                args '-v /root/.m2:/root/.m2'
-            }
-        }
+      label 'docker'
+    }
     parameters {
         string(
             name: 'BRANCH',
@@ -24,11 +21,18 @@ pipeline {
         )
       }
     stages {
-        stage('Build') {
-                    steps {
-                        sh 'mvn gatling:test -Dgatling.simulationClass=net.doo.loadtest.simulations.BankTransferBookingSimulation'
-                    }
-                }
-
+      stage('Build') {
+        steps {
+          docker.image('maven:3-eclipse-temurin-11').inside(
+          """
+          --entrypoint=''
+          -v ${PWD}:/var/project
+          """){
+                  sh '''
+mvn -f /var/project/pom.xml clean gatling:test -Dmp=master -Denvironment=staging1 -Dmultiplier=1
+                  '''
+              }
+            }
+        }
     }
 }
