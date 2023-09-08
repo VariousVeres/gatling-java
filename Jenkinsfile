@@ -24,7 +24,7 @@ pipeline {
       stage('Build') {
         steps {
         script {
-          docker.image('maven:3-eclipse-temurin-11').inside(
+          docker.image('maven:3.8.6-openjdk-11').inside(
             '''
             --entrypoint=''
             -v ${PWD}:/var/project
