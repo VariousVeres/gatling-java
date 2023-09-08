@@ -35,7 +35,7 @@ pipeline {
                 }
             }
           }
-          gatlingArchive()
+
         }
     }
 }
