@@ -25,10 +25,10 @@ pipeline {
         steps {
         script {
           docker.image('maven:3-eclipse-temurin-11').inside(
-            """
+            '''
             --entrypoint=''
             -v ${PWD}:/var/project
-            """){
+            '''){
                     sh '''
   mvn -f /var/project/pom.xml clean gatling:test -Dmp=master -Denvironment=staging1 -Dmultiplier=1
                     '''
