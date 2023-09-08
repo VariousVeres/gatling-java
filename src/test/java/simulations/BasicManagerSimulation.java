@@ -1,20 +1,24 @@
 package simulations;
 
 import io.gatling.javaapi.core.*;
+//import org.jsoup.Jsoup;
+//import org.jsoup.nodes.Document;
+//import org.jsoup.nodes.Element;
 import utils.APIConfig;
 import io.gatling.javaapi.http.*;
 import utils.ConfigLoader;
+import utils.FileUploadHelper;
 import utils.SharedSession;
 
 
 import static io.gatling.javaapi.core.CoreDsl.*;
 import static io.gatling.javaapi.http.HttpDsl.*;
 
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.net.HttpURLConnection;
 
 import java.net.URL;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -22,6 +26,9 @@ public class BasicManagerSimulation extends Simulation {
     //1
 
     private int atOnceUsersCount1 = 1;
+
+    private Duration duration = Duration.ofMinutes(60);
+    private Duration pause = Duration.ofMinutes(5);
 
     //2
     private int atOnceUsersCount2 = 3;
@@ -39,9 +46,9 @@ public class BasicManagerSimulation extends Simulation {
 
     ScenarioBuilder scenario = scenario("Order")
             .exec(session -> session.set("endpoint_name", "/orders"))
+//            during(Duration.ofMinutes(3)).on(
             .exec(http("Relative")
                     .post(session -> session.getString("endpoint_name"))
-//                    .post("/orders")
                     .body(ElFileBody("payloads/real_payload.json")).asJson()
                     .check(status().is(201))
                     .check(responseTimeInMillis().saveAs("response_time")))
@@ -49,9 +56,10 @@ public class BasicManagerSimulation extends Simulation {
                 String responseTime = session.getString("response_time");
                 System.out.println("Response Time is: " + responseTime + "ms");
                 SharedSession.setSharedValue(responseTime);
-                SharedSession.setUnrealValue("Test unreal value_$$$$");
                 return session;
-            });
+            })
+//        .pause(Duration.ofSeconds(10))
+            ;
 
 
     //1
@@ -72,12 +80,13 @@ public class BasicManagerSimulation extends Simulation {
 
 
     {
-        setUp(user1).protocols(httpProtocol).assertions(myAssertion);
+        setUp(scenario.injectOpen(atOnceUsers(atOnceUsersCount1))).protocols(httpProtocol).assertions(myAssertion);
     }
 
     @Override
     public void after() {
-        System.out.println("Response Time from order that will be populated in Excel table: " + SharedSession.getUnrealValue() + " ms");
+        System.out.println("After method has been started");
+        System.out.println("Response Time from order that will be populated in Excel table: " + SharedSession.getSharedValue() + " ms");
         String endpointUrl = "https://hook.doo.integromat.celonis.com/v47mb2n6jo0zbu8077a7upkab1iioc5k";
         LocalDateTime dateTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
