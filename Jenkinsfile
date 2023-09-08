@@ -28,13 +28,9 @@ pipeline {
           docker.image('maven:3.8.6-openjdk-11').inside(
             """
             --entrypoint=''
-            -v ${PWD}:/var/project
             """){
                     sh '''
-  ls -la /var;
-  ls -la /var/project;
-  ls -la /opt/jenkins/workspace/AcceptanceTests/Load-testing;
-  mvn -f /var/project/pom.xml clean gatling:test -Dmp=master -Denvironment=staging1 -Dmultiplier=1;
+  mvn -f /opt/jenkins/workspace/AcceptanceTests/Load-testing/pom.xml clean gatling:test -Dmp=master -Denvironment=staging1 -Dmultiplier=1;
                     '''
                 }
             }
