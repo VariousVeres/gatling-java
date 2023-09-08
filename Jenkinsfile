@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'selenium_node'
+      }
     parameters {
         string(
             name: 'BRANCH',
@@ -19,11 +21,11 @@ pipeline {
         )
       }
     stages {
-//         stage("Build Maven") {
-//             steps {
-//                 sh 'mvn -B clean package'
-//             }
-//         }
+        stage("Build Maven") {
+            steps {
+                sh 'mvn -B clean package'
+            }
+        }
         stage("Run Gatling") {
             steps {
                 sh 'mvn gatling:test -Dgatling.simulationClass=net.doo.loadtest.simulations.BankTransferBookingSimulation'
