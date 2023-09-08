@@ -31,7 +31,10 @@ pipeline {
             -v ${PWD}:/var/project
             """){
                     sh '''
-  mvn -f /var/project/pom.xml clean gatling:test -Dmp=master -Denvironment=staging1 -Dmultiplier=1
+  ls -la /var;
+  ls -la /var/project;
+  ls -la /opt/jenkins/workspace/AcceptanceTests/Load-testing;
+  mvn -f /var/project/pom.xml clean gatling:test -Dmp=master -Denvironment=staging1 -Dmultiplier=1;
                     '''
                 }
             }
