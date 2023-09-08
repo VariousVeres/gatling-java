@@ -25,7 +25,7 @@ pipeline {
         steps {
         withCredentials([string(credentialsId: 'da729162-2128-4bb1-8195-8e468a2d19b0', variable: 'MP')]) {
           script {
-          withAWS(credentials: 'd2bc6db5-09c6-4790-8826-09fa28fc8ea0', region: settings.region) {
+          withAWS(credentials: 'd2bc6db5-09c6-4790-8826-09fa28fc8ea0', region: 'eu-central-1') {
             tools.addInboundRuleForSecurityGroup("base-staging1-be-alb-s", 443, tools.getAgentPublicIp())
             try {
               docker.image('maven:3.8.6-openjdk-11').inside(
