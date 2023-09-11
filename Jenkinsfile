@@ -14,20 +14,20 @@ pipeline {
             choices: ['staging1', 'staging2', 'staging3', 'staging4', 'staging5', 'staging6', 'staging7', 'staging8'],
             description: ''
         )
+//         choice(
+//             name: 'MULTIPLIER',
+//             choices: [1, 2, 3, 5],
+//             description: ''
+//         )
         choice(
-            name: 'MULTIPLIER',
-            choices: [1, 2, 3, 5],
-            description: ''
-        )
-        choice(
-        name: "BUILD_MINUTES",
+        name: 'BUILD_MINUTES',
         choices: [1, 3, 5, 10, 20, 30, 60],
-        description: "Choose a build minutes duration"
+        description: ''
         )
         choice(
-        name: "PAUSE_SECONDS",
+        name: 'PAUSE_SECONDS',
         choices: [5, 10, 20, 30, 60],
-        description: "Choose a pause between requests duration"
+        description: ''
         )
       }
     stages {
@@ -44,7 +44,7 @@ pipeline {
                             """){
                               sh '''
 
-                mvn clean gatling:test -Dgatling.simulationClass=simulations.BasicManagerSimulation -Denvironment=${INFRASTRUCTURE} -DbuildMinutes=2 -DpauseSeconds=14;
+                mvn clean gatling:test -Dgatling.simulationClass=simulations.BasicManagerSimulation -Denvironment=${INFRASTRUCTURE} -DbuildMinutes=${BUILD_MINUTES} -DpauseSeconds=${PAUSE_SECONDS};
                               '''
                           }
             } finally {
