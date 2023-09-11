@@ -11,6 +11,10 @@ import io.gatling.javaapi.http.*;
 import static io.gatling.javaapi.core.CoreDsl.*;
 import static io.gatling.javaapi.http.HttpDsl.*;
 
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -56,8 +60,6 @@ public class BasicManagerSimulation extends Simulation {
                                 return session.set("date_time", formattedDateTime).set("config", config);
                             })
                             .exec(session -> {
-                                        System.out.println("BUILD MINUTES: " + buildDurationMinutes);
-                                        System.out.println("PAUSE SECONDS MINUTES: " + pauseBetweenRequestsDurationSeconds);
                                         System.out.println("Response time - " + session.getString("response_time"));
                                         System.out.println("Date time - " + session.getString("date_time"));
                                         return session;
@@ -96,7 +98,7 @@ public class BasicManagerSimulation extends Simulation {
     @Override
     public void after() {
         System.out.println("After method has been started");
-//        String endpointUrl = "https://hook.doo.integromat.celonis.com/v47mb2n6jo0zbu8077a7upkab1iioc5k";
+        String endpointUrl = "https://hook.doo.integromat.celonis.com/v47mb2n6jo0zbu8077a7upkab1iioc5k";
 //        LocalDateTime dateTime = LocalDateTime.now();
 //        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 //        String formattedDateTime = dateTime.format(formatter);
@@ -110,24 +112,24 @@ public class BasicManagerSimulation extends Simulation {
 //        String payload = "{\"environement\":\"" + APIConfig.getEnv() + "\",\"response_time\":\"" + SharedSession.getSharedValue() + "\"," +
 //                "\"time_stamp\":\"" + formattedDateTime + "\",\"configuration\":\"" + config1 + "\"}";
 //
-//        try {
-//            URL url = new URL(endpointUrl);
-//            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-//
-//            connection.setRequestMethod("POST");
-//            connection.setRequestProperty("Content-Type", "application/json");
-//            connection.setDoOutput(true);
-//            try (OutputStream os = connection.getOutputStream();
-//                 OutputStreamWriter osw = new OutputStreamWriter(os, "UTF-8")) {
-//                osw.write(payload);
-//                osw.flush();
-//            }
-//            int responseCode = connection.getResponseCode();
-//            System.out.println("Response Code: " + responseCode);
-//            connection.disconnect();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        try {
+            URL url = new URL(endpointUrl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setDoOutput(true);
+            try (OutputStream os = connection.getOutputStream();
+                 OutputStreamWriter osw = new OutputStreamWriter(os, "UTF-8")) {
+                osw.write("{\"environement\":0}");
+                osw.flush();
+            }
+            int responseCode = connection.getResponseCode();
+            System.out.println("Response Code: " + responseCode);
+            connection.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         System.out.println("Make webhooks with responses results were sent");
     }
 
