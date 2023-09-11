@@ -6,18 +6,11 @@ import io.gatling.javaapi.core.*;
 //import org.jsoup.nodes.Element;
 import utils.APIConfig;
 import io.gatling.javaapi.http.*;
-import utils.ConfigLoader;
-import utils.FileUploadHelper;
-import utils.SharedSession;
 
 
 import static io.gatling.javaapi.core.CoreDsl.*;
 import static io.gatling.javaapi.http.HttpDsl.*;
 
-import java.io.*;
-import java.net.HttpURLConnection;
-
-import java.net.URL;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -40,26 +33,41 @@ public class BasicManagerSimulation extends Simulation {
         System.out.println("Simulation is about to start");
     }
 
+    private long buildDurationMinutes = Long.parseLong(System.getProperty("buildMinutes"));
+    private long pauseBetweenRequestsDurationSeconds = Long.parseLong(System.getProperty("pauseSeconds"));
+
     private HttpProtocolBuilder httpProtocol = APIConfig.getHttpProtocol();
 
     private Assertion myAssertion = global().successfulRequests().percent().is(100d);
 
     ScenarioBuilder scenario = scenario("Order")
-            .exec(session -> session.set("endpoint_name", "/orders"))
-//            during(Duration.ofMinutes(3)).on(
-            .exec(http("Relative")
-                    .post(session -> session.getString("endpoint_name"))
-                    .body(ElFileBody("payloads/real_payload.json")).asJson()
-                    .check(status().is(201))
-                    .check(responseTimeInMillis().saveAs("response_time")))
-            .exec(session -> {
-                String responseTime = session.getString("response_time");
-                System.out.println("Response Time is: " + responseTime + "ms");
-                SharedSession.setSharedValue(responseTime);
-                return session;
-            })
-//        .pause(Duration.ofSeconds(10))
-            ;
+
+            .exitBlockOnFail(exec(session -> session.set("endpoint_name", "/orders")).during(Duration.ofMinutes(buildDurationMinutes)).on(
+                    exec(http("Order performing")
+                            .post(session -> session.getString("endpoint_name"))
+                            .body(ElFileBody("payloads/real_payload.json")).asJson()
+                            .check(status().is(201))
+                            .check(responseTimeInMillis().saveAs("response_time")))
+                            .exec(session -> {
+                                LocalDateTime dateTime = LocalDateTime.now();
+                                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                                String formattedDateTime = dateTime.format(formatter);
+                                String config = "Build duration: " + buildDurationMinutes + " min, Pause between requests: " + pauseBetweenRequestsDurationSeconds + " sec";
+                                return session.set("date_time", formattedDateTime).set("config", config);
+                            })
+                            .exec(session -> {
+                                        System.out.println("Response time - " + session.getString("response_time"));
+                                        System.out.println("Date time - " + session.getString("date_time"));
+                                        return session;
+                                    }
+                            )
+                            .exec(http("Webhook sending")
+                                    .post("https://hook.doo.integromat.celonis.com/v47mb2n6jo0zbu8077a7upkab1iioc5k")
+                                    .header("Content-type", "application/json")
+                                    .body(StringBody(session -> "{\"environement\":\"" + APIConfig.getEnv() + "\",\"response_time\":\"" + session.getString("response_time") + "\"," +
+                                            "\"time_stamp\":\"" + session.getString("date_time") + "\",\"configuration\":\"" + session.getString("config") + "\"}"))
+                            )
+                            .pause(pauseBetweenRequestsDurationSeconds)));
 
 
     //1
@@ -86,40 +94,39 @@ public class BasicManagerSimulation extends Simulation {
     @Override
     public void after() {
         System.out.println("After method has been started");
-        System.out.println("Response Time from order that will be populated in Excel table: " + SharedSession.getSharedValue() + " ms");
-        String endpointUrl = "https://hook.doo.integromat.celonis.com/v47mb2n6jo0zbu8077a7upkab1iioc5k";
-        LocalDateTime dateTime = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String formattedDateTime = dateTime.format(formatter);
+//        String endpointUrl = "https://hook.doo.integromat.celonis.com/v47mb2n6jo0zbu8077a7upkab1iioc5k";
+//        LocalDateTime dateTime = LocalDateTime.now();
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+//        String formattedDateTime = dateTime.format(formatter);
 
-        //1
-        String config1 = ConfigLoader.prepareConfigsToWriteInExcel(atOnceUsersCount1);
-
-        //2
-        String config2 = ConfigLoader.prepareConfigsToWriteInExcel(atOnceUsersCount2, rampUsersCount2, rampUsersDuration2);
-
-        String payload = "{\"environement\":\"" + APIConfig.getEnv() + "\",\"response_time\":\"" + SharedSession.getSharedValue() + "\"," +
-                "\"time_stamp\":\"" + formattedDateTime + "\",\"configuration\":\"" + config1 + "\"}";
-
-        try {
-            URL url = new URL(endpointUrl);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-            connection.setRequestMethod("POST");
-            connection.setRequestProperty("Content-Type", "application/json");
-            connection.setDoOutput(true);
-            try (OutputStream os = connection.getOutputStream();
-                 OutputStreamWriter osw = new OutputStreamWriter(os, "UTF-8")) {
-                osw.write(payload);
-                osw.flush();
-            }
-            int responseCode = connection.getResponseCode();
-            System.out.println("Response Code: " + responseCode);
-            connection.disconnect();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println("Make webhook with :   " + SharedSession.getSharedValue() + " ms reault sent");
+//        //1
+//        String config1 = ConfigLoader.prepareConfigsToWriteInExcel(atOnceUsersCount1);
+//
+//        //2
+//        String config2 = ConfigLoader.prepareConfigsToWriteInExcel(atOnceUsersCount2, rampUsersCount2, rampUsersDuration2);
+//
+//        String payload = "{\"environement\":\"" + APIConfig.getEnv() + "\",\"response_time\":\"" + SharedSession.getSharedValue() + "\"," +
+//                "\"time_stamp\":\"" + formattedDateTime + "\",\"configuration\":\"" + config1 + "\"}";
+//
+//        try {
+//            URL url = new URL(endpointUrl);
+//            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//
+//            connection.setRequestMethod("POST");
+//            connection.setRequestProperty("Content-Type", "application/json");
+//            connection.setDoOutput(true);
+//            try (OutputStream os = connection.getOutputStream();
+//                 OutputStreamWriter osw = new OutputStreamWriter(os, "UTF-8")) {
+//                osw.write(payload);
+//                osw.flush();
+//            }
+//            int responseCode = connection.getResponseCode();
+//            System.out.println("Response Code: " + responseCode);
+//            connection.disconnect();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+        System.out.println("Make webhooks with responses results were sent");
     }
 
 }

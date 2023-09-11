@@ -34,7 +34,7 @@ pipeline {
                             """){
                               sh '''
 
-                mvn clean gatling:test -Dgatling.simulationClass=simulations.BasicManagerSimulation;
+                mvn clean gatling:test -Dgatling.simulationClass=simulations.BasicManagerSimulation -Denvironment=$(INFRASTRUCTURE);
                               '''
                           }
             } finally {

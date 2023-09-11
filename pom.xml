@@ -13,6 +13,8 @@
         <gatling.version>3.9.5</gatling.version>
         <gatling-maven-plugin.version>4.2.9</gatling-maven-plugin.version>
         <environment>staging1</environment>
+        <buildMinutes>1</buildMinutes>
+        <pauseSeconds>15</pauseSeconds>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
@@ -46,6 +48,8 @@
                     <continueOnAssertionFailure>true</continueOnAssertionFailure>
                     <jvmArgs>
                         <jvmArg>-Denvironment=${environment}</jvmArg>
+                        <jvmArg>-DbuildMinutes=${buildMinutes}</jvmArg>
+                        <jvmArg>-DpauseSeconds=${pauseSeconds}</jvmArg>
                     </jvmArgs>
                     <!--                    Overrides mvn -Dgatling.simulationClass command-->
                     <!--                    <simulationClass>simulations.BasicManagerSimulation</simulationClass>-->
