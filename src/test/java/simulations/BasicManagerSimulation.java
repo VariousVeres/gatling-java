@@ -56,6 +56,8 @@ public class BasicManagerSimulation extends Simulation {
                                 return session.set("date_time", formattedDateTime).set("config", config);
                             })
                             .exec(session -> {
+                                        System.out.println("BUILD MINUTES: " + buildDurationMinutes);
+                                        System.out.println("PAUSE SECONDS MINUTES: " + pauseBetweenRequestsDurationSeconds);
                                         System.out.println("Response time - " + session.getString("response_time"));
                                         System.out.println("Date time - " + session.getString("date_time"));
                                         return session;
