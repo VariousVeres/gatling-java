@@ -21,12 +21,12 @@ pipeline {
 //         )
         choice(
         name: 'BUILD_MINUTES',
-        choices: [1, 3, 5, 10, 20, 30, 60],
+        choices: [1, 2, 3, 5, 10, 20, 30, 60],
         description: ''
         )
         choice(
         name: 'PAUSE_SECONDS',
-        choices: [5, 10, 20, 30, 60],
+        choices: [0, 5, 10, 20, 30, 60],
         description: ''
         )
       }
