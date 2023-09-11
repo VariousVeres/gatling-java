@@ -19,6 +19,17 @@ pipeline {
             choices: [1, 2, 3, 5],
             description: ''
         )
+        integer(
+        name: "BUILD_MINUTES",
+        defaultValue: 3,
+        description: "Enter an integer parameter"
+        )
+
+        integer(
+        name: "PAUSE_SECONDS",
+        defaultValue: 10,
+        description: "Enter an integer parameter"
+        )
       }
     stages {
       stage('Build') {
@@ -34,7 +45,8 @@ pipeline {
                             """){
                               sh '''
 
-                mvn clean gatling:test -Dgatling.simulationClass=simulations.BasicManagerSimulation -Denvironment=${INFRASTRUCTURE};
+                mvn clean gatling:test -Dgatling.simulationClass=simulations.BasicManagerSimulation -Denvironment=${INFRASTRUCTURE}
+                -DbuildMinutes=${BUILD_MINUTES} -DpauseSeconds=${PAUSE_SECONDS};
                               '''
                           }
             } finally {
