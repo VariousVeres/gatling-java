@@ -21,14 +21,11 @@ pipeline {
         )
         choice(
         name: "BUILD_MINUTES",
-        defaultValue: 3,
         choices: [1, 3, 5, 10, 20, 30, 60],
         description: "Choose a build minutes duration"
         )
-
         choice(
         name: "PAUSE_SECONDS",
-        defaultValue: 10,
         choices: [5, 10, 20, 30, 60],
         description: "Choose a pause between requests duration"
         )
