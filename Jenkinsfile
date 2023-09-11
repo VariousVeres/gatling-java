@@ -44,7 +44,7 @@ pipeline {
                             """){
                               sh '''
 
-                mvn clean gatling:test -Dgatling.simulationClass=simulations.BasicManagerSimulation -Denvironment=${INFRASTRUCTURE} -DbuildMinutes=${BUILD_MINUTES} -DpauseSeconds=${PAUSE_SECONDS};
+                mvn clean gatling:test -Dgatling.simulationClass=simulations.BasicManagerSimulation -Denvironment=${INFRASTRUCTURE} -DbuildMinutes=2 -DpauseSeconds=14;
                               '''
                           }
             } finally {
