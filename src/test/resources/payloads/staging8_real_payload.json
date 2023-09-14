@@ -1,0 +1,547 @@
+{
+  "access_codes": [
+    "MULTIALL"
+  ],
+  "coupon_codes": [
+    "PROMO_CODE_FOR_RESTRICTED_CATEGORIES"
+  ],
+  "external_customer_id": null,
+  "payment": {
+    "path_keys": null,
+    "type": "bank_transfer"
+  },
+  "buyer_answers": {
+    "advanced": {
+      "opt_out": false,
+      "double_opt_in": false
+    },
+    "additional": [
+      {
+        "answer": 447400123456,
+        "question": "Buyer question phone number",
+        "type": "phone"
+      },
+      {
+        "answer": "1la",
+        "question": "Buyer question single selection",
+        "type": "radio"
+      },
+      {
+        "answer": "Eum quasi excepteur ",
+        "question": "Buyer custom question paragraph mandatory",
+        "type": "paragraph"
+      },
+      {
+        "answer": {
+          "vat_percent": 12,
+          "vat": 129,
+          "price": 1200,
+          "category_name": "Buyer product paid",
+          "category_id": 419704,
+          "amount": 1,
+          "question_id": 281212,
+          "is_product": true,
+          "available_amount": 99999
+        },
+        "question": "Buyer product paid",
+        "type": "simple_product"
+      },
+      {
+        "answer": {
+          "vat_percent": 0,
+          "vat": 0,
+          "price": 0,
+          "category_name": "Buyer product free",
+          "category_id": 419705,
+          "amount": 1,
+          "question_id": 281212,
+          "is_product": true,
+          "available_amount": 99999
+        },
+        "question": "Buyer product free",
+        "type": "simple_product"
+      }
+    ],
+    "default": {
+      "email": "xuzuvojyg@mailinator.com",
+      "city": "Harum consequat Sed",
+      "zip": 81618,
+      "street_number": 295,
+      "street_name": "Leila Duke",
+      "country": "AX",
+      "company_name": "Barnes Moore Co",
+      "last_name": "Brewer",
+      "first_name": "Denise",
+      "salutation": 1
+    }
+  },
+  "tickets": [
+    {
+      "attendee_answers": [
+        {
+          "ticket": {
+            "external_ticket_id": null,
+            "id": null
+          },
+          "external_customer_id": null,
+          "advanced": {
+            "opt_out": false,
+            "double_opt_in": false
+          },
+          "additional": [
+            {
+              "answer": "Ut est sint blanditi",
+              "question": "Attendee question test",
+              "type": "text"
+            },
+            {
+              "answer": "answer1",
+              "question": "Attendee dropdown question",
+              "type": "dropdown"
+            },
+            {
+              "answer": {
+                "vat_percent": 1,
+                "vat": 12,
+                "price": 1200,
+                "category_name": "Attendee product",
+                "category_id": 419706,
+                "amount": 1,
+                "question_id": 281213,
+                "is_product": true,
+                "available_amount": 99995
+              },
+              "question": "Attendee product",
+              "type": "simple_product"
+            },
+            {
+              "answer": {
+                "vat_percent": 11.58,
+                "vat": 1038,
+                "price": 10000,
+                "category_name": "Attendee product restricted for category",
+                "category_id": 419707,
+                "amount": 1,
+                "question_id": 281213,
+                "is_product": true,
+                "available_amount": 99998
+              },
+              "question": "Attendee product restricted for category",
+              "type": "simple_product"
+            },
+            {
+              "answer": {
+                "vat_percent": 0,
+                "vat": 0,
+                "price": 0,
+                "category_name": "Attendee free product for product group 1",
+                "category_id": 419708,
+                "amount": 1,
+                "question_id": 281213,
+                "is_product": true,
+                "available_amount": 99996
+              },
+              "question": "Attendee free product for product group 1",
+              "type": "simple_product"
+            },
+            {
+              "answer": {
+                "vat_percent": 1,
+                "vat": 12,
+                "price": 1200,
+                "category_name": "Attendee product for product group 2",
+                "category_id": 419709,
+                "amount": 1,
+                "question_id": 281213,
+                "is_product": true,
+                "available_amount": 99995
+              },
+              "question": "Attendee product for product group 2",
+              "type": "simple_product"
+            },
+            {
+              "answer": [
+                "Est laborum in sapie",
+                "Quidem aute id alia",
+                "Natus dolore quos en"
+              ],
+              "question": "Attendee question multiselect with 20 answers",
+              "type": "checkboxes"
+            }
+          ],
+          "default": {
+            "email": "xuzuvojyg@mailinator.com",
+            "last_name": "Brewer",
+            "first_name": "Denise"
+          }
+        }
+      ],
+      "amount": 1,
+      "price": 5200,
+      "category_id": 419695
+    },
+    {
+      "attendee_answers": [
+        {
+          "ticket": {
+            "external_ticket_id": null,
+            "id": null
+          },
+          "external_customer_id": null,
+          "advanced": {
+            "opt_out": false,
+            "double_opt_in": false
+          },
+          "additional": [
+            {
+              "answer": "Repellendus Fugiat ",
+              "question": "Attendee question test",
+              "type": "text"
+            },
+            {
+              "answer": "answer2",
+              "question": "Attendee dropdown question",
+              "type": "dropdown"
+            },
+            {
+              "answer": {
+                "vat_percent": 1,
+                "vat": 12,
+                "price": 1200,
+                "category_name": "Attendee product",
+                "category_id": 419706,
+                "amount": 1,
+                "question_id": 281213,
+                "is_product": true,
+                "available_amount": 99995
+              },
+              "question": "Attendee product",
+              "type": "simple_product"
+            },
+            {
+              "answer": {
+                "vat_percent": 0,
+                "vat": 0,
+                "price": 0,
+                "category_name": "Attendee free product for product group 1",
+                "category_id": 419708,
+                "amount": 1,
+                "question_id": 281213,
+                "is_product": true,
+                "available_amount": 99996
+              },
+              "question": "Attendee free product for product group 1",
+              "type": "simple_product"
+            }
+          ],
+          "default": {
+            "email": "somu@mailinator.com",
+            "last_name": "Golden",
+            "first_name": "Sylvia"
+          }
+        },
+        {
+          "ticket": {
+            "external_ticket_id": null,
+            "id": null
+          },
+          "external_customer_id": null,
+          "advanced": {
+            "opt_out": false,
+            "double_opt_in": false
+          },
+          "additional": [
+            {
+              "answer": "Sint ut et sed bland",
+              "question": "Attendee question test",
+              "type": "text"
+            },
+            {
+              "answer": "answer1",
+              "question": "Attendee dropdown question",
+              "type": "dropdown"
+            },
+            {
+              "answer": {
+                "vat_percent": 1,
+                "vat": 12,
+                "price": 1200,
+                "category_name": "Attendee product",
+                "category_id": 419706,
+                "amount": 1,
+                "question_id": 281213,
+                "is_product": true,
+                "available_amount": 99995
+              },
+              "question": "Attendee product",
+              "type": "simple_product"
+            },
+            {
+              "answer": {
+                "vat_percent": 1,
+                "vat": 12,
+                "price": 1200,
+                "category_name": "Attendee product for product group 2",
+                "category_id": 419709,
+                "amount": 1,
+                "question_id": 281213,
+                "is_product": true,
+                "available_amount": 99995
+              },
+              "question": "Attendee product for product group 2",
+              "type": "simple_product"
+            },
+            {
+              "answer": [
+                "Est molestiae suscip",
+                "Sed id fugiat quam"
+              ],
+              "question": "Attendee question multiselect with 20 answers",
+              "type": "checkboxes"
+            }
+          ],
+          "default": {
+            "email": "cabajase@mailinator.com",
+            "last_name": "Ferguson",
+            "first_name": "Leila"
+          }
+        }
+      ],
+      "amount": 2,
+      "price": 2587,
+      "category_id": 419696
+    },
+    {
+      "attendee_answers": [
+        {
+          "ticket": {
+            "external_ticket_id": null,
+            "id": null
+          },
+          "external_customer_id": null,
+          "advanced": {
+            "opt_out": false,
+            "double_opt_in": false
+          },
+          "additional": [
+            {
+              "answer": "Corporis enim eos du",
+              "question": "Attendee question test",
+              "type": "text"
+            },
+            {
+              "answer": "answer1",
+              "question": "Attendee dropdown question",
+              "type": "dropdown"
+            },
+            {
+              "answer": [
+                "Explicabo Quasi est",
+                "Nobis animi ullam s",
+                "Obcaecati iure asper",
+                "Eius aliquid qui par",
+                "Voluptatibus commodo",
+                "Qui amet voluptatem",
+                "Necessitatibus cupid",
+                "Quasi cum itaque num",
+                "Sint omnis dolor sun",
+                "Est laborum in sapie",
+                "Architecto voluptate",
+                "Cillum nostrud quo n",
+                "Minus non sapiente i",
+                "Molestiae dolor libe",
+                "Quidem aute id alia",
+                "Eos illo in exercit",
+                "Nam quis vero labori",
+                "Natus dolore quos en",
+                "Sed id fugiat quam",
+                "Est molestiae suscip"
+              ],
+              "question": "Attendee question multiselect with 20 answers",
+              "type": "checkboxes"
+            }
+          ],
+          "default": {
+            "email": "doxofobyxo@mailinator.com",
+            "last_name": "Barker",
+            "first_name": "Reed"
+          }
+        }
+      ],
+      "amount": 1,
+      "price": 55500,
+      "category_id": 419698
+    },
+    {
+      "attendee_answers": [
+        {
+          "ticket": {
+            "external_ticket_id": null,
+            "id": null
+          },
+          "external_customer_id": null,
+          "advanced": {
+            "opt_out": false,
+            "double_opt_in": false
+          },
+          "additional": [
+            {
+              "answer": "Aliquid in dolore re",
+              "question": "Attendee question test",
+              "type": "text"
+            },
+            {
+              "answer": "answer1",
+              "question": "Attendee dropdown question",
+              "type": "dropdown"
+            },
+            {
+              "answer": {
+                "vat_percent": 0,
+                "vat": 0,
+                "price": 0,
+                "category_name": "Attendee free product for product group 1",
+                "category_id": 419708,
+                "amount": 1,
+                "question_id": 281213,
+                "is_product": true,
+                "available_amount": 99996
+              },
+              "question": "Attendee free product for product group 1",
+              "type": "simple_product"
+            },
+            {
+              "answer": {
+                "vat_percent": 1,
+                "vat": 12,
+                "price": 1200,
+                "category_name": "Attendee product for product group 2",
+                "category_id": 419709,
+                "amount": 1,
+                "question_id": 281213,
+                "is_product": true,
+                "available_amount": 99995
+              },
+              "question": "Attendee product for product group 2",
+              "type": "simple_product"
+            }
+          ],
+          "default": {
+            "email": "pycehy@mailinator.com",
+            "last_name": "Mcclain",
+            "first_name": "Olivia"
+          }
+        }
+      ],
+      "amount": 1,
+      "price": 250000,
+      "category_id": 419702
+    },
+    {
+      "attendee_answers": [
+        {
+          "ticket": {
+            "external_ticket_id": null,
+            "id": null
+          },
+          "external_customer_id": null,
+          "advanced": {
+            "opt_out": false,
+            "double_opt_in": false
+          },
+          "additional": [
+            {
+              "answer": "In enim necessitatib",
+              "question": "Attendee question test",
+              "type": "text"
+            },
+            {
+              "answer": "answer1",
+              "question": "Attendee dropdown question",
+              "type": "dropdown"
+            },
+            {
+              "answer": [
+                "answer 3",
+                "answer 1"
+              ],
+              "question": "Attendee question multiple restricted for ticket catagories",
+              "type": "checkboxes"
+            },
+            {
+              "answer": {
+                "vat_percent": 1,
+                "vat": 12,
+                "price": 1200,
+                "category_name": "Attendee product",
+                "category_id": 419706,
+                "amount": 1,
+                "question_id": 281213,
+                "is_product": true,
+                "available_amount": 99995
+              },
+              "question": "Attendee product",
+              "type": "simple_product"
+            },
+            {
+              "answer": {
+                "vat_percent": 1,
+                "vat": 12,
+                "price": 1200,
+                "category_name": "Attendee product for product group 2",
+                "category_id": 419709,
+                "amount": 1,
+                "question_id": 281213,
+                "is_product": true,
+                "available_amount": 99995
+              },
+              "question": "Attendee product for product group 2",
+              "type": "simple_product"
+            }
+          ],
+          "default": {
+            "email": "kejidaqed@mailinator.com",
+            "last_name": "Rutledge",
+            "first_name": "Imogene"
+          }
+        },
+        {
+          "ticket": {
+            "external_ticket_id": null,
+            "id": null
+          },
+          "external_customer_id": null,
+          "advanced": {
+            "opt_out": false,
+            "double_opt_in": false
+          },
+          "additional": [
+            {
+              "answer": "Quos sed velit eius",
+              "question": "Attendee question test",
+              "type": "text"
+            },
+            {
+              "answer": "answer3",
+              "question": "Attendee dropdown question",
+              "type": "dropdown"
+            }
+          ],
+          "default": {
+            "email": "caje@mailinator.com",
+            "last_name": "Castro",
+            "first_name": "Howard"
+          }
+        }
+      ],
+      "amount": 2,
+      "price": 1200,
+      "category_id": 419703
+    }
+  ],
+  "locale": "en-us",
+  "is_terms_accepted": true,
+  "contact_center": false,
+  "is_manual": false,
+  "event_id": 147252
+}

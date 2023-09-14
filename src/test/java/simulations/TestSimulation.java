@@ -14,7 +14,7 @@ public class TestSimulation extends Simulation {
 //            during(Duration.ofMinutes(3)).on(
             .exec(http("Relative")
                     .post(session -> session.getString("endpoint_name"))
-                    .body(ElFileBody("payloads/real_payload.json")).asJson()
+                    .body(ElFileBody("payloads/staging1_real_payload.json")).asJson()
                     .check(status().is(201))
                     .check(responseTimeInMillis().saveAs("response_time")));
 

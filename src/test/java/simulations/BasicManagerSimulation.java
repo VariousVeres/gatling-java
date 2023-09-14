@@ -44,14 +44,17 @@ public class BasicManagerSimulation extends Simulation {
 
     private Assertion myAssertion = global().successfulRequests().percent().is(100d);
 
+    String payload = "payloads/" + APIConfig.getEnv() + "_real_payload.json";
+
     ScenarioBuilder scenario = scenario("Order")
 
-            .exitBlockOnFail(exec(session -> session.set("endpoint_name", "/orders")).during(Duration.ofMinutes(buildDurationMinutes)).on(
+            .exitBlockOnFail(exec(session -> session.set("endpoint_name", "/orders"))
+                    .during(Duration.ofMinutes(buildDurationMinutes)).on(
                     exec(http("Order performing")
                             .post(session -> session.getString("endpoint_name"))
-                            .body(ElFileBody("payloads/real_payload.json")).asJson()
-                            .check(status().is(201))
-                            .check(responseTimeInMillis().saveAs("response_time")))
+                            .body(ElFileBody(payload)).asJson()
+                                    .check(status().is(201))
+                                    .check(responseTimeInMillis().saveAs("response_time")))
                             .exec(session -> {
                                 LocalDateTime dateTime = LocalDateTime.now();
                                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
