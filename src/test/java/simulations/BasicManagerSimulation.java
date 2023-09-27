@@ -48,32 +48,32 @@ public class BasicManagerSimulation extends Simulation {
 
     ScenarioBuilder scenario = scenario("Order")
             .exitBlockOnFail(exec(session -> session.set("endpoint_name", "/orders"))
-//                    .during(Duration.ofMinutes(buildDurationMinutes)).on(
-                    .exec(http("Order performing")
-                            .post(session -> session.getString("endpoint_name"))
-                            .body(ElFileBody(payload)).asJson()
+                    .during(Duration.ofMinutes(buildDurationMinutes)).on(
+                            exec(http("Order performing")
+                                    .post(session -> session.getString("endpoint_name"))
+                                    .body(ElFileBody(payload)).asJson()
                                     .check(status().is(201))
                                     .check(responseTimeInMillis().saveAs("response_time")))
-                            .exec(session -> {
-                                LocalDateTime dateTime = LocalDateTime.now();
-                                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                                String formattedDateTime = dateTime.format(formatter);
-                                String config = "Build duration: " + buildDurationMinutes + " min, Pause between requests: " + pauseBetweenRequestsDurationSeconds + " sec";
-                                return session.set("date_time", formattedDateTime).set("config", config);
-                            })
-                            .exec(session -> {
-                                        System.out.println("Response time - " + session.getString("response_time"));
-                                        System.out.println("Date time - " + session.getString("date_time"));
-                                        return session;
-                                    }
-                            )
-                            .exec(http("Webhook sending")
-                                    .post("https://hook.doo.integromat.celonis.com/v47mb2n6jo0zbu8077a7upkab1iioc5k")
-                                    .header("Content-type", "application/json")
-                                    .body(StringBody(session -> "{\"environement\":\"" + APIConfig.getEnv() + "\",\"response_time\":\"" + session.getString("response_time") + "\"," +
-                                            "\"time_stamp\":\"" + session.getString("date_time") + "\",\"configuration\":\"" + session.getString("config") + "\"}"))
-                            )
-                            .pause(pauseBetweenRequestsDurationSeconds));
+                                    .exec(session -> {
+                                        LocalDateTime dateTime = LocalDateTime.now();
+                                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                                        String formattedDateTime = dateTime.format(formatter);
+                                        String config = "Build duration: " + buildDurationMinutes + " min, Pause between requests: " + pauseBetweenRequestsDurationSeconds + " sec";
+                                        return session.set("date_time", formattedDateTime).set("config", config);
+                                    })
+                                    .exec(session -> {
+                                                System.out.println("Response time - " + session.getString("response_time"));
+                                                System.out.println("Date time - " + session.getString("date_time"));
+                                                return session;
+                                            }
+                                    )
+                                    .exec(http("Webhook sending")
+                                            .post("https://hook.doo.integromat.celonis.com/v47mb2n6jo0zbu8077a7upkab1iioc5k")
+                                            .header("Content-type", "application/json")
+                                            .body(StringBody(session -> "{\"environement\":\"" + APIConfig.getEnv() + "\",\"response_time\":\"" + session.getString("response_time") + "\"," +
+                                                    "\"time_stamp\":\"" + session.getString("date_time") + "\",\"configuration\":\"" + session.getString("config") + "\"}"))
+                                    )
+                                    .pause(pauseBetweenRequestsDurationSeconds)));
 
 
     //1
