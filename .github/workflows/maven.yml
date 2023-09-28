@@ -1,0 +1,24 @@
+
+
+name: Java CI with Maven and Gatling
+on:
+  workflow_dispatch:  
+  # push:
+    # branches: [ "master" ]
+  # pull_request:
+    # branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Clone repo
+      uses: actions/checkout@v1
+    
+
+    - name: Build with Maven
+      run: mvn gatling:test 
+
+
