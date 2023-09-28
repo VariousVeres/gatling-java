@@ -19,6 +19,6 @@ jobs:
     
 
     - name: Build with Maven
-      run: mvn gatling:test -Dgatling.simulationClass=simulations.BasicManagerSimulation
+      run: mvn gatling:test -Dgatling.simulationClass=simulations.GetGoogleSimulation
 
 
