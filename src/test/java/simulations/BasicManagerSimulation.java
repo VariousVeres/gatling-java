@@ -49,8 +49,8 @@ public class BasicManagerSimulation extends Simulation {
     ScenarioBuilder scenario = scenario("Order")
 
             .exitBlockOnFail(exec(session -> session.set("endpoint_name", "/orders"))
-                    .during(Duration.ofMinutes(buildDurationMinutes)).on(
-                    exec(http("Order performing")
+//                    .during(Duration.ofMinutes(buildDurationMinutes)).on(
+                    .exec(http("Order performing")
                             .post(session -> session.getString("endpoint_name"))
                             .body(ElFileBody(payload)).asJson()
                                     .check(status().is(201))
@@ -73,8 +73,8 @@ public class BasicManagerSimulation extends Simulation {
                                     .header("Content-type", "application/json")
                                     .body(StringBody(session -> "{\"environement\":\"" + APIConfig.getEnv() + "\",\"response_time\":\"" + session.getString("response_time") + "\"," +
                                             "\"time_stamp\":\"" + session.getString("date_time") + "\",\"configuration\":\"" + session.getString("config") + "\"}"))
-                            )
-                            .pause(pauseBetweenRequestsDurationSeconds)));
+                            ));
+//                            .pause(pauseBetweenRequestsDurationSeconds));
 
 
     //1
