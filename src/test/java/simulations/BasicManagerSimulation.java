@@ -34,7 +34,7 @@ public class BasicManagerSimulation extends Simulation {
 
     @Override
     public void before() {
-        System.out.println("Simulation is about to start");
+        System.out.println("Basic manager simulation is about to start");
     }
 
     private long buildDurationMinutes = Long.parseLong(System.getProperty("buildMinutes"));

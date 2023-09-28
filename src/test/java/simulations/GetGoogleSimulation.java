@@ -10,10 +10,16 @@ import static io.gatling.javaapi.http.HttpDsl.http;
 import static io.gatling.javaapi.http.HttpDsl.status;
 
 public class GetGoogleSimulation extends Simulation {
+
+    @Override
+    public void before() {
+        System.out.println("Google get test simulation is about to start");
+    }
+
     ScenarioBuilder scenario = scenario("Get on google.com")
             .exec(http("Making GAT on Google gom")
                     .get("https://google.com")
-                    .check(status().is(201))
+                    .check(status().is(200))
                     .check(responseTimeInMillis().saveAs("response_time")));
 
     {
