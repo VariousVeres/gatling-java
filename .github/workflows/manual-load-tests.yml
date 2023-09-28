@@ -1,6 +1,4 @@
-
-
-name: Java CI with Maven and Gatling
+name: (manual) Load tests
 on:
   workflow_dispatch:  
   # push:
